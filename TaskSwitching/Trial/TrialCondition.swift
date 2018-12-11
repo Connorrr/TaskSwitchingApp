@@ -9,8 +9,8 @@
 //  Trial Conditions
 enum TrialCondition {
     case vowel
-    case even
     case consonant
+    case even
     case odd
 }
 

@@ -57,19 +57,19 @@ class BlockViewController: UIViewController {
                 if random.randomBool() {
                     block = Block(startingTrialCondition: .vowel, numerOfSwitches: 4)
                 } else {
-                    block = Block(startingTrialCondition: .consonant, numerOfSwitches: 4)
+                    block = Block(startingTrialCondition: .even, numerOfSwitches: 4)
                 }
             }else if blockType == .practice {
                 if random.randomBool() {
-                    block = Block(numberOfPracticeTrials: 12, startingTrialCondition: .vowel, isMixed: true, numerOfSwitches: 2)
+                    block = Block(numberTrials: 12, startingTrialCondition: .vowel, isMixed: true, numerOfSwitches: 2)
                 } else {
-                    block = Block(numberOfPracticeTrials: 12, startingTrialCondition: .consonant, isMixed: true, numerOfSwitches: 2)
+                    block = Block(numberTrials: 12, startingTrialCondition: .even, isMixed: true, numerOfSwitches: 2)
                 }
             }else{
                 if random.randomBool() {
                     block = Block(trialCondition: .vowel)
                 } else {
-                    block = Block(trialCondition: .consonant)
+                    block = Block(trialCondition: .even)
                 }
             }
             
@@ -88,7 +88,7 @@ class BlockViewController: UIViewController {
     
     @IBAction func leftButtonPressed(_ sender: UIButton) {
         trialData.response = "vege"
-        checkCorr(response: .consonant)
+        checkCorr(response: .even)
         forceProgress()
     }
     
@@ -108,7 +108,7 @@ class BlockViewController: UIViewController {
     
     @IBAction func rightButtonPressed(_ sender: UIButton) {
         trialData.response = "green"
-        checkCorr(response: .even)
+        checkCorr(response: .consonant)
         forceProgress()
     }
     
@@ -149,7 +149,7 @@ class BlockViewController: UIViewController {
     }
     
     func displayTrial() {
-        self.setBoarder(isAboveBelow: block!.trials![trialIndex].isVegeFruit!)
+        self.setBoarder(isAboveBelow: block!.trials![trialIndex].isEvenOdd!)
         self.fixationCross.isHidden = true
         self.stimImage.isHidden = false
         self.setButtonVisibility(isHidden: false)
@@ -266,9 +266,9 @@ class BlockViewController: UIViewController {
         switch block!.trials![trialIndex].condition! {
         case .vowel:
             trialData.trialCondition = "red"
-        case .even:
-            trialData.trialCondition = "green"
         case .consonant:
+            trialData.trialCondition = "green"
+        case .even:
             trialData.trialCondition = "vege"
         case .odd:
             trialData.trialCondition = "fruit"

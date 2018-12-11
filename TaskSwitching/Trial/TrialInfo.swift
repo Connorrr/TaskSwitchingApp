@@ -12,7 +12,9 @@ struct TrialInfo {
     var question : String?          //  Not really necessary at the moment
     var condition : TrialCondition?
     var correctResponse : TrialCondition?
-    var stim : UIImage?
+    var stim : UIImage?             // For image stim
     var stimName : String?
-    var isVegeFruit : Bool?
+    var stimLabel : String?         // For letter / number stimulus
+    var letterNumberPair : LetterNumberStim?    //  The letter number pair
+    var isEvenOdd : Bool?
 }

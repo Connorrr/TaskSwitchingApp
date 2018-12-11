@@ -21,7 +21,7 @@ class Block {
     
     /// Single condition initializer
     ///
-    /// - Parameter trialCondition: This is the trial condition that will define wheather it is even/odd or above/below (note: the specific condition will be ignored)
+    /// - Parameter trialCondition: This is the trial condition that will define wheather it is even/odd or vowel/consonants (note: the specific condition will be ignored)
     init(trialCondition: TrialCondition) {
         numberOfTrials = 17
         blockType = .single
@@ -33,7 +33,7 @@ class Block {
     /// Mixed condition initialized
     ///
     /// - Parameters:
-    ///   - startingTrialCondition: This is the trial condition that will define wheather we start with even/odd or above/below (note: the specific condition will be ignored)
+    ///   - startingTrialCondition: This is the trial condition that will define wheather we start with even/odd or vowel/consonants (note: the specific condition will be ignored)
     ///   - numerOfSwitches: number of switches in throughout the trial list
     init(startingTrialCondition: TrialCondition, numerOfSwitches: Int) {
         numberOfTrials = 17
@@ -47,20 +47,23 @@ class Block {
     /// Initializer used for the updated practice trials
     ///
     /// - Parameters:
-    ///   - numberOfPracticeTrials: The numer of practice trials to be built in this block
+    ///   - numberTrials: The numer of trials to be built in this block
     ///   - startingTrialCondition: This is the trial condition that will define wheather we start with even/odd or above/below (note: the specific condition will be ignored) however if this is a single blocktype then this value will describe the condition for the whole block
     ///   - isMixed: is this a mixed trial condition
     ///   - numerOfSwitches: if it is mixed how many switches will there be in the block
-    init(numberOfPracticeTrials: Int, startingTrialCondition: TrialCondition, isMixed: Bool, numerOfSwitches: Int?) {
-        numberOfTrials = numberOfPracticeTrials
+    init(numberTrials: Int, startingTrialCondition: TrialCondition, isMixed: Bool, numerOfSwitches: Int?) {
+        numberOfTrials = numberTrials
         if isMixed {
             blockType = .mixed
             startTrialCondition = startingTrialCondition
-            numSwitches = numerOfSwitches!
             if numerOfSwitches == nil {
                 print("numerOfSwitches must be set for mixed practice block")
+                numSwitches = 0
                 return
+            }else{
+                numSwitches = numerOfSwitches!
             }
+            
         } else {
             blockType = .single
             startTrialCondition = startingTrialCondition
@@ -75,12 +78,22 @@ class Block {
         let img = UIImage()
         
         var trial = TrialInfo()
-        var isevenOdd = true
-        if (startTrialCondition == .consonant || startTrialCondition == .odd) {
-            isevenOdd = false
+        var isevenOdd = false
+        if (startTrialCondition == .even || startTrialCondition == .odd) {
+            isevenOdd = true
+        }
+        
+        var randomIndex : Int {
+            return Int.random( in: 0 ... 3 )
         }
 
         for i in 1 ... numberOfTrials! {
+            
+            if i != 1 {
+                trial.letterNumberPair = LetterNumberStim(isVowel: isevenOdd.randomBool(), letterIndex: randomIndex, isOdd: false, numberIndex: randomIndex)
+            }else{
+                
+            }
                 
             if blockType == .mixed {
                 let switchEvery = numberOfTrials!/numSwitches!
@@ -92,7 +105,7 @@ class Block {
             }
                 
             if isevenOdd {
-                trial.isVegeFruit = false
+                trial.isEvenOdd = true
                 if isevenOdd.randomBool() {
                     let data = img.getRedStimulus()
                     trial.condition = .vowel
@@ -100,15 +113,15 @@ class Block {
                     trial.stimName = data.1?.description
                 }else{
                     let data = img.getGreenStimulus()
-                    trial.condition = .even
+                    trial.condition = .consonant
                     trial.stim = data.0
                     trial.stimName = data.1?.description
                 }
             }else{
-                trial.isVegeFruit = true
+                trial.isEvenOdd = true
                 if isevenOdd.randomBool() {
                     let data = img.getVegeStimulus()
-                    trial.condition = .consonant
+                    trial.condition = .even
                     trial.stim = data.0
                     trial.stimName = data.1?.description
                 }else{

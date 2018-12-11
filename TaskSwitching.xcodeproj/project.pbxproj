@@ -35,6 +35,7 @@
 		BF106FFD21BF417900DC6207 /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = BF106FE521BF417900DC6207 /* 8.png */; };
 		BF10700021BF41ED00DC6207 /* jasmine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BF106FFE21BF41ED00DC6207 /* jasmine.jpg */; };
 		BF10700121BF41ED00DC6207 /* AWholeNewWorld.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF106FFF21BF41ED00DC6207 /* AWholeNewWorld.mp3 */; };
+		BF10700421BF791F00DC6207 /* LetterNumberStim.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF10700321BF791F00DC6207 /* LetterNumberStim.swift */; };
 		BF51660C20B6503400112630 /* GreenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BF51660820B6503300112630 /* GreenButton.png */; };
 		BF51660D20B6503400112630 /* FruitButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BF51660920B6503300112630 /* FruitButton.png */; };
 		BF51660E20B6503400112630 /* RedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BF51660A20B6503300112630 /* RedButton.png */; };
@@ -96,6 +97,7 @@
 		BF106FE521BF417900DC6207 /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
 		BF106FFE21BF41ED00DC6207 /* jasmine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = jasmine.jpg; path = TaskSwitching/EasterEgg/jasmine.jpg; sourceTree = SOURCE_ROOT; };
 		BF106FFF21BF41ED00DC6207 /* AWholeNewWorld.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = AWholeNewWorld.mp3; path = TaskSwitching/EasterEgg/AWholeNewWorld.mp3; sourceTree = SOURCE_ROOT; };
+		BF10700321BF791F00DC6207 /* LetterNumberStim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterNumberStim.swift; sourceTree = "<group>"; };
 		BF51660820B6503300112630 /* GreenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenButton.png; path = Buttons/GreenButton.png; sourceTree = SOURCE_ROOT; };
 		BF51660920B6503300112630 /* FruitButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FruitButton.png; path = Buttons/FruitButton.png; sourceTree = SOURCE_ROOT; };
 		BF51660A20B6503300112630 /* RedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RedButton.png; path = Buttons/RedButton.png; sourceTree = SOURCE_ROOT; };
@@ -228,6 +230,14 @@
 			path = Vege;
 			sourceTree = "<group>";
 		};
+		BF10700221BF789500DC6207 /* LetterNumberStim */ = {
+			isa = PBXGroup;
+			children = (
+				BF10700321BF791F00DC6207 /* LetterNumberStim.swift */,
+			);
+			path = LetterNumberStim;
+			sourceTree = "<group>";
+		};
 		BF1E38F620BF874E001D851F /* EasterEgg */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +262,7 @@
 		BF71321D205B7A0D003D89D1 /* Stimulus */ = {
 			isa = PBXGroup;
 			children = (
+				BF10700221BF789500DC6207 /* LetterNumberStim */,
 				BF106FCA21BF417800DC6207 /* 1.png */,
 				BF106FE421BF417800DC6207 /* 2.png */,
 				BF106FC921BF417800DC6207 /* 3.png */,
@@ -507,6 +518,7 @@
 				BFE4C837205F757700E24D5D /* UIImage+StimSelect.swift in Sources */,
 				BF71383B205F42A9008D0108 /* ResponseButton.swift in Sources */,
 				BF6CB0FD206A103F00FBCF39 /* LogFileMaker.swift in Sources */,
+				BF10700421BF791F00DC6207 /* LetterNumberStim.swift in Sources */,
 				BF884E18205A24B0002262DB /* InstructionsTextView.swift in Sources */,
 				BFE4C839205F76A700E24D5D /* Int+Random.swift in Sources */,
 				BF884DFD205A2044002262DB /* AppDelegate.swift in Sources */,
