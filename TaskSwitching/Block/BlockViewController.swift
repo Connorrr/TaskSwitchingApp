@@ -55,21 +55,21 @@ class BlockViewController: UIViewController {
         if blockType != nil {
             if blockType == .mixed {
                 if random.randomBool() {
-                    block = Block(startingTrialCondition: .red, numerOfSwitches: 4)
+                    block = Block(startingTrialCondition: .vowel, numerOfSwitches: 4)
                 } else {
-                    block = Block(startingTrialCondition: .vege, numerOfSwitches: 4)
+                    block = Block(startingTrialCondition: .consonant, numerOfSwitches: 4)
                 }
             }else if blockType == .practice {
                 if random.randomBool() {
-                    block = Block(numberOfPracticeTrials: 12, startingTrialCondition: .red, isMixed: true, numerOfSwitches: 2)
+                    block = Block(numberOfPracticeTrials: 12, startingTrialCondition: .vowel, isMixed: true, numerOfSwitches: 2)
                 } else {
-                    block = Block(numberOfPracticeTrials: 12, startingTrialCondition: .vege, isMixed: true, numerOfSwitches: 2)
+                    block = Block(numberOfPracticeTrials: 12, startingTrialCondition: .consonant, isMixed: true, numerOfSwitches: 2)
                 }
             }else{
                 if random.randomBool() {
-                    block = Block(trialCondition: .red)
+                    block = Block(trialCondition: .vowel)
                 } else {
-                    block = Block(trialCondition: .vege)
+                    block = Block(trialCondition: .consonant)
                 }
             }
             
@@ -88,27 +88,27 @@ class BlockViewController: UIViewController {
     
     @IBAction func leftButtonPressed(_ sender: UIButton) {
         trialData.response = "vege"
-        checkCorr(response: .vege)
+        checkCorr(response: .consonant)
         forceProgress()
     }
     
     //  NOT USED
     @IBAction func fruitButtonPressed(_ sender: UIButton) {
         trialData.response = "fruit"
-        checkCorr(response: .fruit)
+        checkCorr(response: .odd)
         forceProgress()
     }
     
     //  NOT USED
     @IBAction func redButtonPressed(_ sender: UIButton) {
         trialData.response = "red"
-        checkCorr(response: .red)
+        checkCorr(response: .vowel)
         forceProgress()
     }
     
     @IBAction func rightButtonPressed(_ sender: UIButton) {
         trialData.response = "green"
-        checkCorr(response: .green)
+        checkCorr(response: .even)
         forceProgress()
     }
     
@@ -264,13 +264,13 @@ class BlockViewController: UIViewController {
         trialData.stim = block!.trials![trialIndex].stimName!
         
         switch block!.trials![trialIndex].condition! {
-        case .red:
+        case .vowel:
             trialData.trialCondition = "red"
-        case .green:
+        case .even:
             trialData.trialCondition = "green"
-        case .vege:
+        case .consonant:
             trialData.trialCondition = "vege"
-        case .fruit:
+        case .odd:
             trialData.trialCondition = "fruit"
         }
     }

@@ -76,7 +76,7 @@ class Block {
         
         var trial = TrialInfo()
         var isevenOdd = true
-        if (startTrialCondition == .vege || startTrialCondition == .fruit) {
+        if (startTrialCondition == .consonant || startTrialCondition == .odd) {
             isevenOdd = false
         }
 
@@ -95,12 +95,12 @@ class Block {
                 trial.isVegeFruit = false
                 if isevenOdd.randomBool() {
                     let data = img.getRedStimulus()
-                    trial.condition = .red
+                    trial.condition = .vowel
                     trial.stim = data.0
                     trial.stimName = data.1?.description
                 }else{
                     let data = img.getGreenStimulus()
-                    trial.condition = .green
+                    trial.condition = .even
                     trial.stim = data.0
                     trial.stimName = data.1?.description
                 }
@@ -108,12 +108,12 @@ class Block {
                 trial.isVegeFruit = true
                 if isevenOdd.randomBool() {
                     let data = img.getVegeStimulus()
-                    trial.condition = .vege
+                    trial.condition = .consonant
                     trial.stim = data.0
                     trial.stimName = data.1?.description
                 }else{
                     let data = img.getFruitStimulus()
-                    trial.condition = .fruit
+                    trial.condition = .odd
                     trial.stim = data.0
                     trial.stimName = data.1?.description
                 }
