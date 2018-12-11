@@ -18,8 +18,8 @@ class BlockViewController: UIViewController {
     @IBOutlet weak var boarderView: UIView!
     
     @IBOutlet weak var vegeButton: ResponseButton!
-    @IBOutlet weak var fruitButton: ResponseButton!
-    @IBOutlet weak var redButton: ResponseButton!
+    @IBOutlet weak var fruitButton: ResponseButton!     //  This button is not used in the TS app
+    @IBOutlet weak var redButton: ResponseButton!       //  This button is not used in the TS app
     @IBOutlet weak var greenButton: ResponseButton!
     
     var blockType : BlockType?
@@ -39,6 +39,10 @@ class BlockViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //  Set middle buttons to be invis in the containers
+        redButton.alpha = 0.0
+        fruitButton.alpha = 0.0
         
         print("The block type is:  ")
         dump(blockType)
@@ -147,10 +151,11 @@ class BlockViewController: UIViewController {
         self.fixationCross.isHidden = true
         self.stimImage.isHidden = false
         self.setButtonVisibility(isHidden: false)
-        self.responseTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { (responseTimer) in self.displayResponse() })
+        self.responseTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { (responseTimer) in self.displayBlank() })
         self.trialStartTime = Date()
     }
     
+    // THERE IS NO FEEDBACK IN THE TS APP SO THIS IS SKIPPED
     func displayResponse () {
         self.fixationCross.isHidden = true
         self.stimImage.isHidden = true
