@@ -17,10 +17,10 @@ class BlockViewController: UIViewController {
     @IBOutlet weak var fixationCross: UILabel!
     @IBOutlet weak var boarderView: UIView!
     
-    @IBOutlet weak var vegeButton: ResponseButton!
+    @IBOutlet weak var leftButton: ResponseButton!
     @IBOutlet weak var fruitButton: ResponseButton!     //  This button is not used in the TS app
     @IBOutlet weak var redButton: ResponseButton!       //  This button is not used in the TS app
-    @IBOutlet weak var greenButton: ResponseButton!
+    @IBOutlet weak var rightButton: ResponseButton!
     
     var blockType : BlockType?
     var block : Block?
@@ -86,25 +86,27 @@ class BlockViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func vegeButtonPressed(_ sender: UIButton) {
+    @IBAction func leftButtonPressed(_ sender: UIButton) {
         trialData.response = "vege"
         checkCorr(response: .vege)
         forceProgress()
     }
     
+    //  NOT USED
     @IBAction func fruitButtonPressed(_ sender: UIButton) {
         trialData.response = "fruit"
         checkCorr(response: .fruit)
         forceProgress()
     }
     
+    //  NOT USED
     @IBAction func redButtonPressed(_ sender: UIButton) {
         trialData.response = "red"
         checkCorr(response: .red)
         forceProgress()
     }
     
-    @IBAction func greenButtonPressed(_ sender: UIButton) {
+    @IBAction func rightButtonPressed(_ sender: UIButton) {
         trialData.response = "green"
         checkCorr(response: .green)
         forceProgress()
@@ -215,10 +217,10 @@ class BlockViewController: UIViewController {
     }
     
     func setButtonVisibility(isHidden: Bool) {
-        self.vegeButton.isHidden = isHidden
+        self.leftButton.isHidden = isHidden
         self.fruitButton.isHidden = isHidden
         self.redButton.isHidden = isHidden
-        self.greenButton.isHidden = isHidden
+        self.rightButton.isHidden = isHidden
     }
     
     func getResponseTime() {

@@ -148,12 +148,12 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="m4I-l8-ad5" userLabel="ButtonStackView">
                                 <rect key="frame" x="50" y="872" width="668" height="102"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISt-hX-lUc" userLabel="VegeButton" customClass="ResponseButton" customModule="TaskSwitching" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISt-hX-lUc" userLabel="LeftButton" customClass="ResponseButton" customModule="TaskSwitching" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="152" height="102"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Greater Than" image="VegeButton.png"/>
                                         <connections>
-                                            <action selector="vegeButtonPressed:" destination="3uN-N6-O0y" eventType="touchUpInside" id="o3b-Ya-AC2"/>
+                                            <action selector="leftButtonPressed:" destination="3uN-N6-O0y" eventType="touchUpInside" id="o3b-Ya-AC2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RR1-JN-C05" userLabel="FruitButton" customClass="ResponseButton" customModule="TaskSwitching" customModuleProvider="target">
@@ -174,13 +174,13 @@
                                             <action selector="redButtonPressed:" destination="3uN-N6-O0y" eventType="touchUpInside" id="kdB-FF-jLV"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTH-RD-j9R" userLabel="GreenButton" customClass="ResponseButton" customModule="TaskSwitching" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTH-RD-j9R" userLabel="RightButton" customClass="ResponseButton" customModule="TaskSwitching" customModuleProvider="target">
                                         <rect key="frame" x="516" y="0.0" width="152" height="102"/>
                                         <state key="normal" title="Odd" image="GreenButton.png">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="greenButtonPressed:" destination="3uN-N6-O0y" eventType="touchUpInside" id="EkC-bZ-BNp"/>
+                                            <action selector="rightButtonPressed:" destination="3uN-N6-O0y" eventType="touchUpInside" id="EkC-bZ-BNp"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -216,10 +216,10 @@
                         <outlet property="feedbackLabel" destination="oxx-Ow-HGg" id="LS0-fb-Iii"/>
                         <outlet property="fixationCross" destination="QUf-oY-C62" id="st5-ji-RzL"/>
                         <outlet property="fruitButton" destination="RR1-JN-C05" id="4dV-4T-W89"/>
-                        <outlet property="greenButton" destination="DTH-RD-j9R" id="0Ek-WI-hdw"/>
+                        <outlet property="leftButton" destination="ISt-hX-lUc" id="AT1-Q7-OYr"/>
                         <outlet property="redButton" destination="lQ0-d3-tlA" id="DMP-Sd-qxQ"/>
+                        <outlet property="rightButton" destination="DTH-RD-j9R" id="0Ek-WI-hdw"/>
                         <outlet property="stimImage" destination="ot3-dr-gSu" id="X2T-I5-X7W"/>
-                        <outlet property="vegeButton" destination="ISt-hX-lUc" id="AT1-Q7-OYr"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="returnToInstructions" id="Bbe-oS-AWF"/>
                     </connections>
                 </viewController>
