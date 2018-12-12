@@ -17,6 +17,7 @@ class BlockViewController: UIViewController {
     @IBOutlet weak var fixationCross: UILabel!
     @IBOutlet weak var boarderView: UIView!
     
+    @IBOutlet weak var stimLabel: UILabel!
     @IBOutlet weak var leftButton: ResponseButton!
     @IBOutlet weak var fruitButton: ResponseButton!     //  This button is not used in the TS app
     @IBOutlet weak var redButton: ResponseButton!       //  This button is not used in the TS app
@@ -124,7 +125,8 @@ class BlockViewController: UIViewController {
     
     func executeBlock() {
 
-        self.stimImage.image = block?.trials![trialIndex].stim!
+        //self.stimImage.image = block?.trials![trialIndex].stim!  //  No images in this version
+        self.stimLabel.text = block?.trials![trialIndex].stimLabel
         if StaticVars.id == "JasmineTest" {
             self.stimImage.image = #imageLiteral(resourceName: "jasmine.jpg")
         }
@@ -144,6 +146,7 @@ class BlockViewController: UIViewController {
     func displayFixation() {
         self.fixationCross.isHidden = false
         self.stimImage.isHidden = true
+        self.stimLabel.isHidden = true
         self.boarderView.isHidden = true
         self.setButtonVisibility(isHidden: true)
     }
@@ -151,7 +154,8 @@ class BlockViewController: UIViewController {
     func displayTrial() {
         self.setBoarder(isAboveBelow: block!.trials![trialIndex].isEvenOdd!)
         self.fixationCross.isHidden = true
-        self.stimImage.isHidden = false
+        //self.stimImage.isHidden = false
+        self.stimLabel.isHidden = false
         self.setButtonVisibility(isHidden: false)
         self.responseTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { (responseTimer) in self.displayBlank() })
         self.trialStartTime = Date()
@@ -161,6 +165,7 @@ class BlockViewController: UIViewController {
     func displayResponse () {
         self.fixationCross.isHidden = true
         self.stimImage.isHidden = true
+        self.stimLabel.isHidden = true
         self.boarderView.isHidden = true
         self.setButtonVisibility(isHidden: true)
         if self.trialData.corr != 1 {
@@ -176,6 +181,7 @@ class BlockViewController: UIViewController {
         self.fixationCross.text = "+"
         self.fixationCross.isHidden = true
         self.stimImage.isHidden = true
+        self.stimLabel.isHidden = true
         self.boarderView.isHidden = true
         let defaults = UserDefaults.standard
         let startTime = defaults.object(forKey: "startTime") as! Date
@@ -261,17 +267,16 @@ class BlockViewController: UIViewController {
             trialData.blockType = "Single"
         }
         
-        trialData.stim = block!.trials![trialIndex].stimName!
-        
+        trialData.stim = block!.trials![trialIndex].stimLabel!
         switch block!.trials![trialIndex].condition! {
         case .vowel:
-            trialData.trialCondition = "red"
+            trialData.trialCondition = "vowel"
         case .consonant:
-            trialData.trialCondition = "green"
+            trialData.trialCondition = "consonant"
         case .even:
-            trialData.trialCondition = "vege"
+            trialData.trialCondition = "even"
         case .odd:
-            trialData.trialCondition = "fruit"
+            trialData.trialCondition = "odd"
         }
     }
     

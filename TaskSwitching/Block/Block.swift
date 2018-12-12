@@ -94,7 +94,7 @@ class Block {
                 
             trials?.append(trial)
             
-            print("\(String(describing: trial.letterNumberPair!._letter))\(String(describing: trial.letterNumberPair!._number))\n")
+            print(trial.stimLabel!)
         }
 
     }
@@ -133,12 +133,12 @@ class Block {
         if trialNum == 1 {
             trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, isOdd: isOdd, numberIndex: randomIndex)
         }else{
-            if isOdd != trials![trialNum-1].isEven {        //  Does this and the last trial share number conditions
-                if isVowel == trials![trialNum-1].isVowel { //  Does this and the last trial share letter conditions
+            if isOdd != trials![trialNum-2].isEven {        //  Does this and the last trial share number conditions
+                if isVowel == trials![trialNum-2].isVowel { //  Does this and the last trial share letter conditions
                     if randomBool == true {                 //  Make sure the numbers are different
-                        trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, isOdd: isOdd, numberIndex: randomIndex, excludingNumber: trials![trialNum-1].letterNumberPair!._number!)
+                        trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, isOdd: isOdd, numberIndex: randomIndex, excludingNumber: trials![trialNum-2].letterNumberPair!._number!)
                     }else{                                  // Make sure the letters are different
-                        trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, excludingLetter: trials![trialNum-1].letterNumberPair!._letter!, isOdd: isOdd, numberIndex: randomIndex)
+                        trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, excludingLetter: trials![trialNum-2].letterNumberPair!._letter!, isOdd: isOdd, numberIndex: randomIndex)
                     }
                 }else{
                     trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, isOdd: isOdd, numberIndex: randomIndex)
@@ -147,7 +147,8 @@ class Block {
                 trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, isOdd: isOdd, numberIndex: randomIndex)
             }
         }
-        
+        trial.isEvenOdd = true      // TODO:  This needs to be changed to show whether the current trial is a EvenOdd trial or a VowelConsonant trial
+        trial.stimLabel = "\(trialLetterNum!._letter!)\(trialLetterNum!._number!)"
         trial.letterNumberPair = trialLetterNum
         
         return trial
