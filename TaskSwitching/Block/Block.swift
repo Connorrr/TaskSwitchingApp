@@ -71,7 +71,6 @@ class Block {
         }
         buildTrialList()
     }
-
     
     private func buildTrialList() {
         
@@ -89,52 +88,69 @@ class Block {
 
         for i in 1 ... numberOfTrials! {
             
-            if i != 1 {
-                trial.letterNumberPair = LetterNumberStim(isVowel: isevenOdd.randomBool(), letterIndex: randomIndex, isOdd: false, numberIndex: randomIndex)
-            }else{
-                
-            }
-                
-            if blockType == .mixed {
-                let switchEvery = numberOfTrials!/numSwitches!
-                    
-                if ( i % switchEvery == 0 ) {
-                    isevenOdd = !isevenOdd
-                }
-                    
-            }
-                
-            if isevenOdd {
-                trial.isEvenOdd = true
-                if isevenOdd.randomBool() {
-                    let data = img.getRedStimulus()
-                    trial.condition = .vowel
-                    trial.stim = data.0
-                    trial.stimName = data.1?.description
-                }else{
-                    let data = img.getGreenStimulus()
-                    trial.condition = .consonant
-                    trial.stim = data.0
-                    trial.stimName = data.1?.description
-                }
-            }else{
-                trial.isEvenOdd = true
-                if isevenOdd.randomBool() {
-                    let data = img.getVegeStimulus()
-                    trial.condition = .even
-                    trial.stim = data.0
-                    trial.stimName = data.1?.description
-                }else{
-                    let data = img.getFruitStimulus()
-                    trial.condition = .odd
-                    trial.stim = data.0
-                    trial.stimName = data.1?.description
-                }
-            }
+            trial = getTria(trialNum: i)
+            
+            //TODO:  Impliment the code to handle the trial strucure for mixed business
                 
             trials?.append(trial)
+            
+            print("\(String(describing: trial.letterNumberPair!._letter))\(String(describing: trial.letterNumberPair!._number))\n")
         }
 
+    }
+    
+    
+    /// Returns the LetterNumberSim object that works for this trial.  This function makes usre that there aren't repeats.
+    ///
+    /// - Parameter trialNum: the current trial number
+    /// - Returns: The LetterNumberStim object for this trial
+    private func getTria(trialNum: Int) -> TrialInfo {
+        
+        var trial = TrialInfo()
+        var trialLetterNum : LetterNumberStim?
+        var randomBool : Bool {
+            let foo = false
+            return foo.randomBool()
+        }
+        var randomIndex : Int {
+            return Int.random( in: 0 ... 3 )
+        }
+        let isOdd = randomBool
+        let isVowel = randomBool
+        
+        if isVowel {
+            trial.condition = .vowel
+        }else{
+            trial.condition = .consonant
+        }
+        
+        if isOdd {
+            trial.condition = .odd
+        }else{
+            trial.condition = .even
+        }
+        
+        if trialNum == 1 {
+            trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, isOdd: isOdd, numberIndex: randomIndex)
+        }else{
+            if isOdd != trials![trialNum-1].isEven {        //  Does this and the last trial share number conditions
+                if isVowel == trials![trialNum-1].isVowel { //  Does this and the last trial share letter conditions
+                    if randomBool == true {                 //  Make sure the numbers are different
+                        trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, isOdd: isOdd, numberIndex: randomIndex, excludingNumber: trials![trialNum-1].letterNumberPair!._number!)
+                    }else{                                  // Make sure the letters are different
+                        trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, excludingLetter: trials![trialNum-1].letterNumberPair!._letter!, isOdd: isOdd, numberIndex: randomIndex)
+                    }
+                }else{
+                    trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, isOdd: isOdd, numberIndex: randomIndex)
+                }
+            }else{
+                trialLetterNum = LetterNumberStim(isVowel: isVowel, letterIndex: randomIndex, isOdd: isOdd, numberIndex: randomIndex)
+            }
+        }
+        
+        trial.letterNumberPair = trialLetterNum
+        
+        return trial
     }
     
 }

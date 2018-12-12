@@ -16,5 +16,7 @@ struct TrialInfo {
     var stimName : String?
     var stimLabel : String?         // For letter / number stimulus
     var letterNumberPair : LetterNumberStim?    //  The letter number pair
-    var isEvenOdd : Bool?
+    var isEvenOdd : Bool?           //  Used to tell if it is an even/odd trial or vowel/consonant
+    var isEven : Bool?
+    var isVowel : Bool?
 }
