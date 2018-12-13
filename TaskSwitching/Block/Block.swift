@@ -16,7 +16,7 @@ class Block {
     let startTrialCondition : TrialCondition
     let numSwitches : Int?
     var trials : [TrialInfo]? = []
-    
+    var isTrialSwitch : [Bool] = []
     
     
     /// Single condition initializer
@@ -44,7 +44,7 @@ class Block {
     }
     
     
-    /// Initializer used for the updated practice trials
+    /// Initializer used for the updated practice trials and mixed block
     ///
     /// - Parameters:
     ///   - numberTrials: The numer of trials to be built in this block
@@ -63,6 +63,8 @@ class Block {
             }else{
                 numSwitches = numerOfSwitches!
             }
+            print("This is the switch list for \(numberTrials) trials")
+            sortMixedBlock()
             
         } else {
             blockType = .single
@@ -88,10 +90,13 @@ class Block {
 
         for i in 1 ... numberOfTrials! {
             
-            trial = getTria(trialNum: i)
+            trial = getTrial(trialNum: i)
             
-            //TODO:  Impliment the code to handle the trial strucure for mixed business
-                
+            if blockType != .single {
+                trial.isSwitchTrial = isTrialSwitch[i-1]
+            }else{
+                trial.isSwitchTrial = false
+            }
             trials?.append(trial)
             
             print(trial.stimLabel!)
@@ -99,12 +104,64 @@ class Block {
 
     }
     
+    private func sortMixedBlock() {
+        
+        var randomBool : Bool {
+            let b = false
+            return b.randomBool()
+        }
+        
+        let nonSwitchCount : Int = Int(Float(numberOfTrials!/2).rounded(.up))
+        let switchCount : Int = Int(Float(numberOfTrials!/2).rounded(.down))
+        var switchArray = Array(repeating: true, count: switchCount)
+        var nonSwitchArray = Array(repeating: false, count: nonSwitchCount)
+        
+        var repeatSwitchCount : Int = 0
+        var repeatNonSwitchCount : Int = 1
+        
+        isTrialSwitch.append(nonSwitchArray.removeFirst())
+        for _ in 1 ..< numberOfTrials! {
+            if repeatSwitchCount >= 3 {
+                isTrialSwitch.append(nonSwitchArray.removeFirst())
+                repeatNonSwitchCount = repeatNonSwitchCount + 1
+                repeatSwitchCount = 0
+            }else if repeatNonSwitchCount >= 3 {
+                isTrialSwitch.append(switchArray.removeFirst())
+                repeatSwitchCount = repeatSwitchCount + 1
+                repeatNonSwitchCount = 0
+            }else{
+                if randomBool {     // Put in a switch trial if it's still available
+                    if switchArray.count > 0 {
+                        isTrialSwitch.append(switchArray.removeFirst())
+                        repeatSwitchCount = repeatSwitchCount + 1
+                        repeatNonSwitchCount = 0
+                    }else{
+                        isTrialSwitch.append(nonSwitchArray.removeFirst())
+                        repeatNonSwitchCount = repeatNonSwitchCount + 1
+                        repeatSwitchCount = 0
+                    }
+                }else{              // Put in a nonswitch trial if it's still available
+                    if nonSwitchArray.count > 0 {
+                        isTrialSwitch.append(nonSwitchArray.removeFirst())
+                        repeatNonSwitchCount = repeatNonSwitchCount + 1
+                        repeatSwitchCount = 0
+                    }else{
+                        isTrialSwitch.append(switchArray.removeFirst())
+                        repeatSwitchCount = repeatSwitchCount + 1
+                        repeatNonSwitchCount = 0
+                    }
+                }
+            }
+        }
+        print(isTrialSwitch)
+    }
+    
     
     /// Returns the LetterNumberSim object that works for this trial.  This function makes usre that there aren't repeats.
     ///
     /// - Parameter trialNum: the current trial number
     /// - Returns: The LetterNumberStim object for this trial
-    private func getTria(trialNum: Int) -> TrialInfo {
+    private func getTrial(trialNum: Int) -> TrialInfo {
         
         var trial = TrialInfo()
         var trialLetterNum : LetterNumberStim?

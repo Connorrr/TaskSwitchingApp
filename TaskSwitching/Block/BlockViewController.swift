@@ -88,7 +88,7 @@ class BlockViewController: UIViewController {
     }
     
     @IBAction func leftButtonPressed(_ sender: UIButton) {
-        trialData.response = "vege"
+        trialData.response = "left"
         checkCorr(response: .even)
         forceProgress()
     }
@@ -108,7 +108,7 @@ class BlockViewController: UIViewController {
     }
     
     @IBAction func rightButtonPressed(_ sender: UIButton) {
-        trialData.response = "green"
+        trialData.response = "right"
         checkCorr(response: .consonant)
         forceProgress()
     }
@@ -152,7 +152,7 @@ class BlockViewController: UIViewController {
     }
     
     func displayTrial() {
-        self.setBoarder(isAboveBelow: block!.trials![trialIndex].isEvenOdd!)
+        self.setBoarder(isSwitch: block!.trials![trialIndex].isSwitchTrial!)
         self.fixationCross.isHidden = true
         //self.stimImage.isHidden = false
         self.stimLabel.isHidden = false
@@ -244,9 +244,9 @@ class BlockViewController: UIViewController {
         }
     }
     
-    /// Sets the boarder visibility for the ox around stim
-    func setBoarder(isAboveBelow: Bool) {
-        if isAboveBelow {
+    /// Sets the boarder visibility around stim
+    func setBoarder(isSwitch: Bool) {
+        if isSwitch {
             self.boarderView.isHidden = false
         } else {
             self.boarderView.isHidden = true
